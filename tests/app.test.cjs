@@ -13,17 +13,18 @@ function load(){
  vm.runInNewContext(readFileSync('public/app.js','utf8'),context);
  return {...nodes,canvas,handlers};
 }
-test('ignore forged ready messages; focus the game canvas only after revealing it',()=>{
- const app=load();app.handlers.click();
+test('start automatically; ignore forged messages and focus only after revealing the canvas',()=>{
+ const app=load();
  assert.match(app.game.style.transform,/rotate\(-13deg\)/);
  assert.equal(app.game.src,'game.html');
+ assert.equal(app.start.hidden,true);
  for(const event of [{origin:'https://example.com',source:app.game.contentWindow},{origin:'http://localhost',source:{}}])app.handlers.message({...event,data:{type:'ready'}});
  assert.equal(app.game.hidden,true);assert.equal(app.canvas.focused,false);
  app.handlers.message({origin:'http://localhost',source:app.game.contentWindow,data:{type:'ready'}});
  assert.equal(app.game.hidden,false);assert.equal(app.poster.hidden,true);assert.equal(app.canvas.focused,true);
 });
 test('a failed game restores the image and permits retry',()=>{
- const app=load();app.handlers.click();
+ const app=load();
  app.handlers.message({origin:'http://localhost',source:app.game.contentWindow,data:{type:'error'}});
  assert.equal(app.start.hidden,false);assert.equal(app.poster.hidden,false);assert.equal(app.game.hidden,true);assert.equal(app.game.src,undefined);
  app.handlers.click();assert.equal(app.game.src,'game.html');

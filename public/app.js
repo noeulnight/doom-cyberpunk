@@ -12,13 +12,14 @@ function fail(){
  game.hidden=true;
  poster.hidden=false;
  start.hidden=false;
- alert('둠을 불러오지 못했습니다. 입을 눌러 다시 실행해 주세요.');
+ alert('Could not load DOOM. Click the mouth to retry.');
 }
-start.addEventListener('click',()=>{
+function launch(){
  start.hidden=true;
  game.src='game.html';
  timeout=setTimeout(fail,60000);
-});
+}
+start.addEventListener('click',launch);
 window.addEventListener('message',event=>{
  if(event.origin!==location.origin||event.source!==game.contentWindow)return;
  if(event.data.type==='error')fail();
@@ -29,3 +30,5 @@ window.addEventListener('message',event=>{
   game.contentDocument.getElementById('screen').focus();
  }
 });
+
+launch();
