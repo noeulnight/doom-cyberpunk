@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Talia doom</title>
+<style>
+html,body{margin:0;width:100%;height:100%;background:#000}
+body{display:flex;align-items:center;justify-content:center}
+#photo{position:relative;width:min(100vw,176.923vh);aspect-ratio:736/416}
+img{position:absolute;inset:0;display:block;width:100%;height:100%;pointer-events:none}
+#overlay{z-index:2}
+#mouth{position:absolute;z-index:1;left:36.8206522%;top:46.6346154%;width:33.9673913%;height:44.7115385%;overflow:hidden}
+iframe{position:absolute;left:50%;top:50%;width:320px;height:200px;border:0;transform-origin:center}
+button{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:transparent;cursor:pointer}
+button:focus-visible{outline:2px solid white;outline-offset:2px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div id="photo">
+<img id="poster" src="character.png" alt="">
+<img id="overlay" src="character-overlay.png" alt="검은 마스크 안쪽 홀로그램에서 둠을 플레이하는 캐릭터">
+<div id="mouth"><iframe id="game" title="Talia doom" allow="autoplay" hidden></iframe><button id="start" title="Talia doom 시작" aria-label="Talia doom 시작"></button></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
